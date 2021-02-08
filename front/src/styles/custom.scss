@@ -3,6 +3,21 @@
 body{
     background-attachment: fixed;
 }
+.fontNormal{
+    font-family: 'Lato', sans-serif;
+    font-weight: normal;
+}
+
+.fontLight{
+    font-family: 'Lato', sans-serif;
+    font-weight: lighter;
+}
+
+.fontBold{
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+}
+
 .App {
     .content{
         width: $width;
@@ -15,7 +30,7 @@ body{
         position: relative;
         z-index: 2;
         .logo {
-            font-family: 'Lato', sans-serif;
+            @extend .fontNormal;
             font-size: 22px;
             color: white;
             order: 1;
@@ -31,8 +46,7 @@ body{
                 padding: 0;
                 li {
                     display: inline-flex;
-                    font-family: 'Lato', sans-serif;
-                    font-weight: lighter;
+                    @extend .fontLight;
                     
                     a{
                         color: white;
@@ -56,34 +70,29 @@ body{
             padding: 39px 35px 5px 35px;
             color: white;
             span{
-                font-family: 'Lato', sans-serif;
-                font-weight: lighter;
+                @extend .fontLight;
                 font-size: 14px;
             }
             .title{
-                font-family: 'Lato', sans-serif;
-                font-weight: normal;
+                @extend .fontNormal;
                 font-size: 50px;
                 color: white;
             }
             p{
-                font-family: 'Lato', sans-serif;
-                font-weight: lighter;
+                @extend .fontLight;
                 font-size: 20px;
             }
             .moreInfo{
                 span{
                     display: inline-flex;
-                    font-family: 'Lato', sans-serif;
-                    font-weight: lighter;
+                    @extend .fontLight;
                     font-size: 13px;
                     border-bottom: rgba(255, 255, 255, 0.541) solid 1.5px;
                     line-height: 11px;
                 }
             }
             p.veredict{
-                font-family: 'Lato', sans-serif;
-                font-weight: bold;
+                @extend .fontBold;
                 font-size: 20px;
                 margin-top: 40px;
             }
@@ -119,8 +128,7 @@ body{
                 background-color: rgba(0, 0, 0, 0.2);
                 text-transform: uppercase;
                 color: white;
-                font-family: 'Lato', sans-serif;
-                font-weight: normal;
+                @extend .fontNormal;
                 font-size: 13px;
                 flex-direction: row-reverse;
                 padding-right: 5px;
@@ -134,7 +142,7 @@ body{
                 background-color: rgba(255, 255, 255, 0.2);
                 width: 70%;
                 color: #464646;
-                font-family: 'Lato', sans-serif;
+                @extend .fontNormal;
                 
                 padding-left: 5px;
                 span.number{
@@ -158,6 +166,122 @@ body{
                 position: relative;
                 top: 17px;
                 left: -5px;
+            }
+        }
+    }
+
+    #rullings{
+        h3{
+            color: #333333;
+            @extend .fontLight;
+            font-size: 30px;
+        }
+        .person{
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        .personInfo{
+            padding-top: 100px;
+            padding-bottom: 20px;
+            position: absolute;
+            bottom: 50px;
+            color: white;
+            background: rgb(255,255,255);
+            padding-left: 30px;
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.75) 100%);
+            h4{
+                @extend .fontNormal;
+                color: white;
+                font-size: 35px;
+                margin-bottom: 5px;
+                line-height: 35px;
+                position: relative;
+                .resumeUp{
+                    background-color: $green;
+                    width: 25px;
+                    height: 25px;
+                    display: inline-flex;
+                    position:absolute;
+                    left: -30px;
+                    top: 5px;
+                    justify-content: center;
+                }
+                .resumeDown{
+                    background-color: $orange;
+                    width: 25px;
+                    height: 25px;
+                    display: inline-flex;
+                    position:absolute;
+                    left: -30px;
+                    top: 5px;
+                    justify-content: center;
+                }
+            }
+            p{
+                @extend .fontLight;
+                font-size: 17px;
+            }
+            .votePerson{
+                display: flex;
+                
+                button{
+                    padding: 5px;
+                    align-self: center;
+                    margin-right: 10px;
+                    border:1px solid transparent;
+                    line-height: 10px;
+                    cursor: pointer;
+                }
+
+                button.voteUp{
+                    background-color: $green;
+                }
+
+                button.voteDown{
+                    background-color: $orange;
+                    
+                }
+
+                button.selected{
+                    border: 1px solid white;
+                }
+
+                button.vote{
+                    background-color: transparent;
+                    border:1px solid white;
+                    padding: 14px 20px;
+                }
+
+            }
+        }
+        .voteResults{
+            display: flex;
+            position: absolute;
+            bottom: 0;
+            height: 50px;
+            width: 100.1%;
+            div{
+                display: flex;
+                align-self: center;
+                height: 50px;
+                color: white;
+                @extend .fontLight;
+                font-size: 30px;
+                *{
+                    align-self: center; 
+                }
+            }
+            div.up{
+                background-color: rgba(28, 187, 180, 0.8);
+                padding-left: 5px;
+            }
+            div.down{
+                background-color: rgba(255, 173, 29, 0.8);
+                justify-content: flex-end;
+                padding-right: 5px;
             }
         }
     }

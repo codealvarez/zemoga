@@ -1,13 +1,22 @@
-import logo from './logo.svg';
 import React, { useState } from 'react'
 
-import './App.css';
-import Header from "./components/Header";
+// Import routes system
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import './styles/custom.scss';
+import General from "./layouts/General";
 function App() {
   return (
-    <div className="App">
-      <Header></Header>
-    </div>
+    <Router>
+      <div className="App">
+        <General></General>
+      </div>
+    </Router>
+    
   );
 }
 

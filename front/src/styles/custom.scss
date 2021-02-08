@@ -1,0 +1,341 @@
+@import "variables";
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+body{
+    background-attachment: fixed;
+}
+.fontNormal{
+    font-family: 'Lato', sans-serif;
+    font-weight: normal;
+}
+
+.fontLight{
+    font-family: 'Lato', sans-serif;
+    font-weight: lighter;
+}
+
+.fontBold{
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+}
+
+.App {
+    .content{
+        width: $width;
+        margin: 0 auto;
+    }
+    .contentPage{
+        color: #333333;
+    }
+    header{
+        height: 100px;
+        background: rgb(255,255,255);
+        background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(51,51,51,0.82) 100%);
+        position: relative;
+        z-index: 2;
+        .logo {
+            @extend .fontNormal;
+            font-size: 28px;
+            color: white;
+            order: 1;
+            width: 200px;
+            align-self: center;
+            a{
+                color: white;
+            }
+        }
+
+        nav {
+            text-align: right;
+            order: 2;
+            ul {
+                margin: 0;
+                padding: 0;
+                li {
+                    display: inline-flex;
+                    @extend .fontLight;
+                    
+                    a{
+                        color: white;
+                        padding: 0 27px;
+                        text-transform: capitalize;
+                    }
+                }
+            }
+        }
+
+    }
+    #slider{
+        background-image: url("../images/pope.jpg");
+        background-size: cover;
+        padding-top: 100px;
+        position: relative;
+        z-index: 1;
+        top: -100px;
+        margin-bottom: -100px;
+        #infoBox{
+            padding: 39px 35px 5px 35px;
+            color: white;
+            span{
+                @extend .fontLight;
+                font-size: 14px;
+            }
+            .title{
+                @extend .fontNormal;
+                font-size: 50px;
+                color: white;
+            }
+            p{
+                @extend .fontLight;
+                font-size: 20px;
+            }
+            .moreInfo{
+                span{
+                    display: inline-flex;
+                    @extend .fontLight;
+                    font-size: 13px;
+                    border-bottom: rgba(255, 255, 255, 0.541) solid 1.5px;
+                    line-height: 11px;
+                }
+            }
+            p.veredict{
+                @extend .fontBold;
+                font-size: 20px;
+                margin-top: 40px;
+            }
+        }
+        .voteBox{
+            display: flex;
+            margin-bottom: 70px;
+            .up, .down{
+                display: inline-flex;
+                width: 50%;
+                height: 80px;
+                justify-content: center;
+                align-items: center;
+            }
+            .up {
+                background-color: rgba(28, 187, 180, 0.9);
+                backdrop-filter: blur(50px);
+            }
+            .down {
+                background-color: rgba(255, 173, 29, 0.9);
+                backdrop-filter: blur(50px);
+            }
+        }
+        .closingBox{
+            width: 100%;
+            display: inline-flex;
+            div{
+                height: 50px;
+            }
+            .closing{
+                display: flex;
+                width: 30%;
+                background-color: rgba(0, 0, 0, 0.2);
+                text-transform: uppercase;
+                color: white;
+                @extend .fontNormal;
+                font-size: 13px;
+                flex-direction: row-reverse;
+                padding-right: 5px;
+                span{
+                    align-self: center;
+                }
+            }
+            
+            .days{
+                display: flex;
+                background-color: rgba(255, 255, 255, 0.2);
+                width: 70%;
+                color: #464646;
+                @extend .fontNormal;
+                
+                padding-left: 5px;
+                span.number{
+                    font-size: 36px;
+                    align-self: center;
+                    font-weight: normal;
+                }
+                span.text{
+                    font-size: 36px;
+                    align-self: center;
+                    font-weight: lighter;
+                }
+            }
+            .days::before{
+                content: '';
+                width: 0;
+                height: 0;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-left: 8px solid rgba(0, 0, 0, 0.2);
+                position: relative;
+                top: 17px;
+                left: -5px;
+            }
+        }
+    }
+
+    #rullings{
+        h3{
+            color: #333333;
+            @extend .fontLight;
+            font-size: 30px;
+        }
+        .person{
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        .personInfo{
+            padding-top: 100px;
+            padding-bottom: 20px;
+            position: absolute;
+            bottom: 50px;
+            color: white;
+            background: rgb(255,255,255);
+            padding-left: 30px;
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.75) 100%);
+            h4{
+                @extend .fontNormal;
+                color: white;
+                font-size: 35px;
+                margin-bottom: 5px;
+                line-height: 35px;
+                position: relative;
+                .resumeUp{
+                    background-color: $green;
+                    width: 25px;
+                    height: 25px;
+                    display: inline-flex;
+                    position:absolute;
+                    left: -30px;
+                    top: 5px;
+                    justify-content: center;
+                }
+                .resumeDown{
+                    background-color: $orange;
+                    width: 25px;
+                    height: 25px;
+                    display: inline-flex;
+                    position:absolute;
+                    left: -30px;
+                    top: 5px;
+                    justify-content: center;
+                }
+            }
+            p{
+                @extend .fontLight;
+                font-size: 17px;
+            }
+            .votePerson{
+                display: flex;
+                
+                button{
+                    padding: 5px;
+                    align-self: center;
+                    margin-right: 10px;
+                    border:1px solid transparent;
+                    line-height: 10px;
+                    cursor: pointer;
+                }
+
+                button.voteUp{
+                    background-color: $green;
+                }
+
+                button.voteDown{
+                    background-color: $orange;
+                    
+                }
+
+                button.selected{
+                    border: 1px solid white;
+                }
+
+                button.vote{
+                    background-color: transparent;
+                    border:1px solid white;
+                    padding: 14px 20px;
+                }
+
+            }
+        }
+        .voteResults{
+            display: flex;
+            position: absolute;
+            bottom: 0;
+            height: 50px;
+            width: 100.1%;
+            div{
+                display: flex;
+                align-self: center;
+                height: 50px;
+                color: white;
+                @extend .fontLight;
+                font-size: 30px;
+                *{
+                    align-self: center; 
+                }
+            }
+            div.up{
+                background-color: rgba(28, 187, 180, 0.8);
+                padding-left: 5px;
+            }
+            div.down{
+                background-color: rgba(255, 173, 29, 0.8);
+                justify-content: flex-end;
+                padding-right: 5px;
+            }
+        }
+    }
+
+    #submitPerson{
+        .submitLabel{
+            @extend .fontLight;
+            font-size: 29px;
+        }
+        button{
+            @extend .fontNormal;
+            font-size: 20px;
+            border: 3px solid black;
+            padding: 8px 30px;
+        }
+    }
+
+    footer{
+        #navFooter{
+            display: flex;
+            align-items: center;
+            ul{
+                margin:0;
+                padding: 0;
+                li {
+                    display: inline-flex;
+                    @extend .fontNormal;
+                    font-size: 13px;
+                    a{
+                        color: gray;
+                        padding-right: 27px;
+                        text-transform: capitalize;
+                    }
+                }
+            }
+        }
+        .follow{
+            @extend .fontLight;
+            font-size: 13px;
+            color: gray;
+            margin-right: 10px;
+            align-items: center;
+        }
+        .footerIcon{
+            margin-left: 10px;
+            position: relative;
+            top: 4px;
+        }
+    }
+
+}

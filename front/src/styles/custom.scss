@@ -286,4 +286,17 @@ body{
         }
     }
 
+    #submitPerson{
+        .submitLabel{
+            @extend .fontLight;
+            font-size: 29px;
+        }
+        button{
+            @extend .fontNormal;
+            font-size: 20px;
+            border: 3px solid black;
+            padding: 8px 30px;
+        }
+    }
+
 }

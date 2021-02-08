@@ -5,8 +5,8 @@ import image4 from '../../../images/person4.jpg';
 export const peopleData = [
     {
         id: 1,
-        up: 15,
-        down: 85,
+        up: 45,
+        down: 55,
         img: image1,
         name: 'Kanye West',
         category: 'Entertainment',

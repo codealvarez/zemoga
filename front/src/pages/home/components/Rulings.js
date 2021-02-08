@@ -64,12 +64,10 @@ export default function Rullings(){
                                 <div className="down" style={{width: (person.down + '%') }}>
                                     <span>{person.down}%</span>
                                     <ThumbDownIcon style={{ color: common.white,  fontSize:30 }}></ThumbDownIcon>
-                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
                 ))}
             </GridList>
         </Container>

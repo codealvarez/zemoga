@@ -7,7 +7,7 @@ import Past from "../pages/past/Past";
 import {Switch, Route} from "react-router-dom";
 import HowWorks from '../pages/howWorks/HowWorks';
 import Error404 from '../pages/error404/Error404';
-export default function General(){
+export default function General(props){
     return (
         <>
             <Header></Header>

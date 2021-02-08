@@ -1,12 +1,10 @@
-import React from 'react'
-import Typography from '@material-ui/core/Typography';
+import React, { useEffect, useState } from 'react'
 import Container from '@material-ui/core/Container';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import SearchIcon from '@material-ui/icons/Search';
 import { common } from '@material-ui/core/colors';
-import {Router, Switch, Route, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -16,9 +14,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { app } from "../config/firebaseConfig";
+import { Auth } from "../config/AuthContext";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -40,10 +39,25 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function Header(props){
+    const [user, setUser] = React.useState({});
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [register, setRegister] = React.useState(false);
     const [age, setAge] = React.useState('');
+
+    
+    useEffect(() => {
+        app.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                console.log('This is the user: ', user)
+                setUser(user)
+            } else {
+                // No user is signed in.
+                console.log('There is no logged in user');
+            }
+        });
+    });
+
     const handleClickOpen = () => {
         setOpen(true);
         setRegister(false);
@@ -59,6 +73,7 @@ export default function Header(props){
             
         } else{
             console.log("HAciendo login");
+            ingresar();
         }
     };
 
@@ -82,6 +97,20 @@ export default function Header(props){
             return <span>Log in</span>
         }
     }
+    const ingresar = async e => {
+        
+        await app
+            .auth()
+            .signInWithEmailAndPassword("daniel07079@gmail.com", "12345678")
+            .then(result => {
+                console.log(result);
+                setUser(result.user)
+            })
+            .catch(error => {
+                console.error(error);
+                
+            });
+    };
     function RenderRegister(props) {
         if(props.register){
             return <div>
@@ -131,7 +160,11 @@ export default function Header(props){
                             <ul>
                                 <li><Link to="/past-trials">Past trials</Link></li>
                                 <li><Link to="/how-it-works">How it works</Link></li>
-                                <li><a onClick={handleClickOpen}>Login/Sign up</a></li>
+                                <li>
+                                    {!user.uid ? (
+                                    <a onClick={handleClickOpen}>Login/Sign up</a>) : (<div style={{color:"#fff"}}>Hi {user.email}</div>)
+                                    }
+                                </li>
                             </ul>
                         </nav>
                     </Grid>

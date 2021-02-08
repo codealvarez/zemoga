@@ -299,4 +299,37 @@ body{
         }
     }
 
+    footer{
+        #navFooter{
+            display: flex;
+            align-items: center;
+            ul{
+                margin:0;
+                padding: 0;
+                li {
+                    display: inline-flex;
+                    @extend .fontNormal;
+                    font-size: 13px;
+                    a{
+                        color: gray;
+                        padding-right: 27px;
+                        text-transform: capitalize;
+                    }
+                }
+            }
+        }
+        .follow{
+            @extend .fontLight;
+            font-size: 13px;
+            color: gray;
+            margin-right: 10px;
+            align-items: center;
+        }
+        .footerIcon{
+            margin-left: 10px;
+            position: relative;
+            top: 4px;
+        }
+    }
+
 }

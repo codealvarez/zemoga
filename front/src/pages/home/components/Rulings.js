@@ -37,7 +37,7 @@ export default function Rullings(){
             <h3>Previous rulings</h3>
             <GridList spacing={30} cellHeight={550} className={classes.gridList}>
                 {peopleData.map((person) => (
-                    <div className="personCont">
+                    <div className="personCont" key={person.id}>
                         <div className="person" style={{backgroundImage: "url(" + person.img + ")"}}>
                             <div className="personInfo">
                                 <h4>

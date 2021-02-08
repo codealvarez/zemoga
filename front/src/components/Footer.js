@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import {Link} from "react-router-dom";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     spBox: {
@@ -31,9 +32,9 @@ export default function Footer(){
                     <Grid item xs={8} md={8} className={classes.containerL}>
                     <nav id="navFooter">
                         <ul>
-                            <li><a href="">Terms & conditions</a></li>
-                            <li><a href="">Privacy policy</a></li>
-                            <li><a href="">Contact us</a></li>
+                            <li><Link to="/terms">Terms & conditions</Link></li>
+                            <li><Link to="/policy">Privacy policy</Link></li>
+                            <li><Link to="/contact">Contact us</Link></li>
                         </ul>
                     </nav>
                     </Grid>

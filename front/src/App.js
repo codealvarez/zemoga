@@ -11,9 +11,12 @@ import './styles/custom.scss';
 import General from "./layouts/General";
 function App() {
   return (
-    <div className="App">
-      <General></General>
-    </div>
+    <Router>
+      <div className="App">
+        <General></General>
+      </div>
+    </Router>
+    
   );
 }
 

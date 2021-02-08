@@ -23,6 +23,9 @@ body{
         width: $width;
         margin: 0 auto;
     }
+    .contentPage{
+        color: #333333;
+    }
     header{
         height: 100px;
         background: rgb(255,255,255);
@@ -36,6 +39,9 @@ body{
             order: 1;
             width: 200px;
             align-self: center;
+            a{
+                color: white;
+            }
         }
 
         nav {

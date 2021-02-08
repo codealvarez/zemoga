@@ -1,12 +1,18 @@
-import logo from './logo.svg';
 import React, { useState } from 'react'
 
+// Import routes system
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import './styles/custom.scss';
-import Header from "./components/Header";
+import General from "./layouts/General";
 function App() {
   return (
     <div className="App">
-      <Header></Header>
+      <General></General>
     </div>
   );
 }

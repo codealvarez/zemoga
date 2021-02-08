@@ -1,4 +1,11 @@
 @import "variables";
+@import url('https://fonts.googleapis.com/css2?family=Hanalei&family=Lato:wght@300;400;700&display=swap');
 .App h1{
     color: $rojo;
+}
+
+.App .logo {
+    font-family: 'Hanalei', cursive;
+    font-size: 80pt
+    ;
 }

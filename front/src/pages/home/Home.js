@@ -1,18 +1,11 @@
 import React from 'react';
 import Slider from "./components/Slider";
+import SpeakBox from "./components/SpeakBox";
 export default function Home(){
     
     return <div id="contentHome">
         <Slider></Slider>
-        <div id="speakBox">
-            <div className="left">
-                Sepack out. Be heard.
-                <span>Be counted</span>
-            </div>
-            <div className="right">
-                Rule of Thumb is a crowd sourced court of public opinion where anyone and everyone can speak out and speak freely. It’s easy: You share your opinion, we analyze and put the data in a public report.
-            </div>
-        </div>
+        <SpeakBox></SpeakBox>
         <h3>Previous rulings</h3>
         <div id="peopleBox">
             <div className="personBox">

@@ -3,7 +3,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import icon_wiki  from "../../images/icon_wiki.png";
+import icon_wiki  from "../../../images/icon_wiki.png";
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import { common } from '@material-ui/core/colors';

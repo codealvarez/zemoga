@@ -7,6 +7,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     spBox: {
+        backgroundColor: "#ebebeb",
         marginTop: "34px",
         marginBottom: "40px",
         color: "#333333",

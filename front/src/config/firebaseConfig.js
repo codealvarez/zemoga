@@ -1,6 +1,6 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
-import { useFirebaseApp } from "reactfire";
+import "firebase/firestore";
 const app = firebase.default.initializeApp({
     apiKey: "AIzaSyBxvY0l1l7R5kXejCG3k25vZ1FOgl3lZLs",
     authDomain: "zemoga-codealvarez.firebaseapp.com",

@@ -3,10 +3,10 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import ClearIcon from '@material-ui/icons/Clear';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     spBox: {
-        backgroundColor: "#ebebeb",
         marginTop: "34px",
         marginBottom: "40px",
         color: "#333333",

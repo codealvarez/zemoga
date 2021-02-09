@@ -2,6 +2,7 @@ import React from "react";
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import submitBackground from "../../../images/submitBackground.jpg";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -10,7 +11,9 @@ const useStyles = makeStyles((theme: Theme) =>
         marginTop: "34px",
         marginBottom: "40px",
         color: "#333333",
-        paddingLeft: "20px"
+        paddingLeft: "20px",
+        backgroundImage: "url(" + submitBackground + ")",
+        backgroundSize: "cover"
     }
   })
 );

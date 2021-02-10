@@ -58,16 +58,19 @@ export default function Header(props){
     const [password, setPassword] = React.useState('');
     const [ingresando, setIngresando] = React.useState(false);
     
-    app.auth().onAuthStateChanged(function(user) {
-        if (user) {
-            console.log('This is the user: ', user)
-            setUser(user);
-            setIngresando(false);
-        } else {
-            // No user is signed in.
-            console.log('There is no logged in user');
-        }
-    });
+    React.useEffect(() => {
+        app.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                console.log('This is the user: ', user)
+                setUser(user);
+                setIngresando(false);
+            } else {
+                // No user is signed in.
+                console.log('There is no logged in user');
+            }
+        });
+    }, [user]);
+    
 
     const handleClickOpen = () => {
         setOpen(true);

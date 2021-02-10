@@ -12,6 +12,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { app } from "../../../config/firebaseConfig";
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import {
     SuspenseWithPerf,
     FirebaseAppProvider,
@@ -32,12 +33,13 @@ const useStyles = makeStyles(() =>
     }
   }),
 );
-export default function Rullings(){
+export default function Rullings(props){
     const [voteOption, setVoteOption] = React.useState([]);
     const [snackPack, setSnackPack] = React.useState([]);
     const [open, setOpen] = React.useState(false);
     const [messageInfo, setMessageInfo] = React.useState(undefined);
     const { data: user } = useUser();
+    const [windowDimensions, setWindowDimensions] = React.useState(getWindowDimensions());
 
     React.useEffect(() => {
         if (snackPack.length && !messageInfo) {
@@ -49,6 +51,12 @@ export default function Rullings(){
             // Close an active snack when a new one is added
             setOpen(false);
         }
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+          }
+      
+          window.addEventListener('resize', handleResize);
+          return () => window.removeEventListener('resize', handleResize);
     }, [snackPack, messageInfo, open]);
 
     const vote = (message, id) => () => {
@@ -176,12 +184,30 @@ export default function Rullings(){
     const people = useFirestoreCollectionData(peopleCollection, { idField: "id" });
     console.log(people);
 
+    function getWindowDimensions() {
+        const { innerWidth: width, innerHeight: height } = window;
+        return {
+          width,
+          height
+        };
+    }
+
+    const getGridListCols = () => {
+        const { innerWidth: width, innerHeight: height } = window;
+        console.log(width);
+        
+        if (width < 600) {
+          return 1;
+        }
+    
+        return 2;
+    }
 
     return <div id="rullings">
         <Container maxWidth="md">
             <h3>Previous rulings</h3>
             {(people.status == "success") ? 
-            <GridList spacing={30} cellHeight={550} className={classes.gridList}>
+            <GridList spacing={30} cellHeight={550} className={classes.gridList} cols={getGridListCols()}>
                 {people.data.map((person) => (
                     <div className="personCont" key={person.id}>
                         <div className="person" style={{backgroundImage: "url(" + person.img + ")"}}>

@@ -24,10 +24,10 @@ export default function Submit(){
         <Container maxWidth="md">
             <div className={classes.spBox}>
                 <Grid container spacing={4}>
-                    <Grid item xs={8} md={8}>
+                    <Grid item xs={12} md={8}>
                         <div className="submitLabel">Is there anyone else you would want us to add?</div>
                     </Grid>
-                    <Grid item xs={4} md={4}>
+                    <Grid item xs={12} md={4}>
                     <button>Submit a name</button>
                     </Grid>
                 </Grid>

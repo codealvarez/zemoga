@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import ClearIcon from '@material-ui/icons/Clear';
+import { Hidden } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,22 +36,25 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function SpeakBox(){
+export default function SpeakBox(props){
     const classes = useStyles();
     return  <div>
             <Container maxWidth="md">
                 <div className={classes.spBox}>
                     <Grid container spacing={4} className={classes.gridBox}>
-                        <Grid item xs={2} md={2} className={classes.firstE}>
+                        <Grid item xs={12} md={2} className={classes.firstE}>
                             Speak out. Be heard. 
                             <div className={classes.span}>Be counted</div>
                         </Grid>
-                        <Grid item xs={9} md={9} className={classes.text1}>
+                        <Grid item xs={12} md={9} className={classes.text1}>
                             Rule of Thumb is a crowd sourced court of public opinion where anyone and everyone can speak out and speak freely. It’s easy: You share your opinion, we analyze and put the data in a public report.
                         </Grid>
-                        <Grid item xs={1} md={1} className={classes.text1}>
-                            <ClearIcon style={{ color: "#444444", fontSize:25 }}></ClearIcon>
-                        </Grid>
+                        <Hidden only='sm'>
+                            <Grid item xs={1} md={1} className={classes.text1}>
+                                <ClearIcon style={{ color: "#444444", fontSize:25 }}></ClearIcon>
+                            </Grid>
+                        </Hidden>
+                        
                     </Grid>
                 </div>
                 

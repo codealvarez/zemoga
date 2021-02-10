@@ -13,7 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import {
     FirebaseAppProvider,
-    useFirestoreDocData,
+    useFirestoreCollectionData,
     useFirestore,
     AuthCheck,
   } from "reactfire";
@@ -44,13 +44,13 @@ export default function Rullings(){
 
     React.useEffect(() => {
         if (snackPack.length && !messageInfo) {
-        // Set a new snack when we don't have an active one
-        setMessageInfo({ ...snackPack[0] });
-        setSnackPack((prev) => prev.slice(1));
-        setOpen(true);
+            // Set a new snack when we don't have an active one
+            setMessageInfo({ ...snackPack[0] });
+            setSnackPack((prev) => prev.slice(1));
+            setOpen(true);
         } else if (snackPack.length && messageInfo && open) {
-        // Close an active snack when a new one is added
-        setOpen(false);
+            // Close an active snack when a new one is added
+            setOpen(false);
         }
     }, [snackPack, messageInfo, open]);
 
@@ -113,11 +113,17 @@ export default function Rullings(){
         ReactDOM.findDOMNode(element).style.border = "2px solid white";
     }
 
+    const peopleCollection = useFirestore().collection('people');
+    const people = useFirestoreCollectionData(peopleCollection, { idField: "id" });
+    console.log(people);
+    
+    
+
     return <div id="rullings">
         <Container maxWidth="md">
             <h3>Previous rulings</h3>
             <GridList spacing={30} cellHeight={550} className={classes.gridList}>
-                {peopleData.map((person) => (
+                {people.data.map((person) => (
                     <div className="personCont" key={person.id}>
                         <div className="person" style={{backgroundImage: "url(" + person.img + ")"}}>
                             <div className="personInfo">

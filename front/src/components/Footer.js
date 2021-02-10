@@ -9,7 +9,11 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     spBox: {
         marginTop: "34px",
-        paddingBottom: "10px"
+        paddingBottom: "10px",
+        backgroundImage: "linear-gradient(to right, gray 33%, rgba(255,255,255,0) 0%)",
+        backgroundPosition: "top",
+        backgroundSize: "5px 2px",
+        backgroundRepeat: "repeat-x"
     },
     containerL: {
         display: "flex",

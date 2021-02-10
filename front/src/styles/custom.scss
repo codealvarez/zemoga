@@ -106,6 +106,10 @@ body{
         .voteBox{
             display: flex;
             margin-bottom: 70px;
+            button{
+                border:"none";
+                outline:"none";
+            }
             .up, .down{
                 display: inline-flex;
                 width: 50%;
@@ -230,6 +234,15 @@ body{
                 @extend .fontLight;
                 font-size: 17px;
             }
+            .btnNoUser{
+                background-color: transparent;
+                border:1px solid white;
+                padding: 14px 20px;
+                border-radius: 0;
+                color: #ffffff;
+                @extend .fontNormal;
+                text-transform: capitalize;
+            }
             .votePerson{
                 display: flex;
                 
@@ -241,16 +254,6 @@ body{
                     line-height: 10px;
                     cursor: pointer;
                 }
-
-                button.voteUp{
-                    background-color: $green;
-                }
-
-                button.voteDown{
-                    background-color: $orange;
-                    
-                }
-
                 button.selected{
                     border: 1px solid white;
                 }
@@ -259,6 +262,23 @@ body{
                     background-color: transparent;
                     border:1px solid white;
                     padding: 14px 20px;
+                    border-radius: 0;
+                    color: #ffffff;
+                    @extend .fontNormal;
+                    text-transform: capitalize;
+                }
+                .voteUp{
+                    background-color: $green;
+                    width:  30px;
+                    min-width:  30px;
+                    border-radius: 0
+                }
+
+                .voteDown{
+                    background-color: $orange;
+                    width:  30px;
+                    min-width:  30px;
+                    border-radius: 0
                 }
 
             }
@@ -302,6 +322,9 @@ body{
             font-size: 20px;
             border: 3px solid black;
             padding: 8px 30px;
+            background-color: transparent;
+            float: right;
+            margin-right: 10px;
         }
     }
 

@@ -3,7 +3,7 @@ import Slider from "./components/Slider";
 import SpeakBox from "./components/SpeakBox";
 import Rullings from "./components/Rulings";
 import Submit from "./components/Submit";
-export default function Home(){
+export default function Home(props){
     
     return <div id="contentHome">
         <Slider></Slider>

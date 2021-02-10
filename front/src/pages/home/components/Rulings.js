@@ -20,15 +20,8 @@ import {
     AuthCheck,
     useUser
   } from "reactfire";
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-around',
-      overflow: 'hidden',
-      backgroundColor: theme.palette.background.paper,
-    },
     gridList: {
     },
     icon: {

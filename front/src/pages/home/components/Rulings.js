@@ -65,13 +65,27 @@ export default function Rullings(){
             console.log("OK");
             message = "Thanks for votting";
             const votesCollection = app.firestore().collection('people/'+id+'/votes');
+            const query = votesCollection.where("user","==",user.uid);
+            //const votesXUser = app.firestore().useFirestoreCollectionData(query, { idField: 'id' });
+            const userVotes = query.get().then((res) => {
+                console.log("Votes per user");
+                console.log(res.size);
+                
+                if(res.size <= 2){
+                    votesCollection.add({
+                        user: user.uid,
+                        option: voteOption[1]
+                    }).then((res) => {
+                        setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }]);
+                    });
+                } else {
+                    message = "Votes per box exceded";
+                    setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }]);
+                }
+                
+            })
 
-            votesCollection.add({
-                user: user.uid,
-                option: voteOption[1]
-            }).then((res) => {
-                setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }]);
-            });
+            
         }else{
             console.log("No");
             setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }]);

@@ -8,6 +8,9 @@ import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import { common } from '@material-ui/core/colors';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -24,25 +27,49 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     buttonB: {
         border: "2px solid white"
-    },
-    voteUp:{
-        backgroundColor: "#1cbbb4",
-        width: "30px",
-        minWidth: "30px",
-        paddingLeft: "1px",
-        borderRadius: 0
-    },
-    voteDown:{
-        backgroundColor: "#ffad1d",
-        width: "30px",
-        minWidth: "30px",
-        paddingLeft: "1px",
-        borderRadius: 0
     }
   }),
 );
 export default function Rullings(){
     const [voteOption, setVoteOption] = React.useState([]);
+    const [snackPack, setSnackPack] = React.useState([]);
+    const [open, setOpen] = React.useState(false);
+    const [messageInfo, setMessageInfo] = React.useState(undefined);
+
+    React.useEffect(() => {
+        if (snackPack.length && !messageInfo) {
+        // Set a new snack when we don't have an active one
+        setMessageInfo({ ...snackPack[0] });
+        setSnackPack((prev) => prev.slice(1));
+        setOpen(true);
+        } else if (snackPack.length && messageInfo && open) {
+        // Close an active snack when a new one is added
+        setOpen(false);
+        }
+    }, [snackPack, messageInfo, open]);
+
+    const vote = (message, id) => () => {
+        console.log(id);
+        console.log(voteOption);
+        if(voteOption[0] == id){
+            console.log("OK");
+        }else{
+            console.log("No");
+            setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }]);
+        }
+        
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+        setOpen(false);
+    };
+
+    const handleExited = () => {
+        setMessageInfo(undefined);
+    };
     const classes = useStyles();
     
     function ValidateVotes(props) {
@@ -55,6 +82,17 @@ export default function Rullings(){
 
     const changeStyle = (id) => {
         console.log(id);
+        // Clean borders for others vote boxes
+        peopleData.forEach(element => {
+            let elementT = document.getElementById("vote-"+element.id+"-1");
+            ReactDOM.findDOMNode(elementT).style.border = "none";
+
+            let elementT2 = document.getElementById("vote-"+element.id+"-2");
+            ReactDOM.findDOMNode(elementT2).style.border = "none";
+
+        });
+
+        // Clean border for inverse option
         const ids = id.split('-');
         if (ids[2] == 1) {
             let element = document.getElementById("vote-"+ids[1]+"-2");
@@ -64,15 +102,11 @@ export default function Rullings(){
             ReactDOM.findDOMNode(element).style.border = "none";
         }
         
+        // Set border for selected vote box option
         let element = document.getElementById(id);
         ReactDOM.findDOMNode(element).style.border = "2px solid white";
     }
 
-    const Vote = () => {
-        console.log("voteOption:");
-        
-        console.log(voteOption);
-    }
     return <div id="rullings">
         <Container maxWidth="md">
             <h3>Previous rulings</h3>
@@ -86,19 +120,19 @@ export default function Rullings(){
                                     {person.name}</h4>
                                 <p>{person.description}</p>
                                 <div className="votePerson">
-                                    <Button id={'vote-'+person.id+'-'+1} className={classes.voteUp} onClick={(e)=>{
+                                    <Button id={'vote-'+person.id+'-'+1} className="voteUp" onClick={(e)=>{
                                         setVoteOption([person.id, 1]);
                                         changeStyle('vote-'+person.id+'-'+1);
                                     }}>
                                         <ThumbUpAltIcon style={{ color: common.white, fontSize:20 }}></ThumbUpAltIcon>  
                                     </Button >
-                                    <Button id={'vote-'+person.id+'-'+2} className={classes.voteDown} onClick={()=>{
+                                    <Button id={'vote-'+person.id+'-'+2} className="voteDown" onClick={()=>{
                                         setVoteOption([person.id, 2]);
                                         changeStyle('vote-'+person.id+'-'+2);
                                     }}>
                                         <ThumbDownIcon style={{ color: common.white,  fontSize:20 }}></ThumbDownIcon>
                                     </Button>
-                                    <Button className="vote" onClick={Vote}>
+                                    <Button className="vote" onClick={vote('Please select an option', person.id)}>
                                         Vote now
                                     </Button>
                                 </div>
@@ -118,5 +152,29 @@ export default function Rullings(){
                 ))}
             </GridList>
         </Container>
+        <Snackbar
+            key={messageInfo ? messageInfo.key : undefined}
+            anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+            }}
+            open={open}
+            autoHideDuration={6000}
+            onClose={handleClose}
+            onExited={handleExited}
+            message={messageInfo ? messageInfo.message : undefined}
+            action={
+            <React.Fragment>
+                <IconButton
+                aria-label="close"
+                color="inherit"
+                className={classes.close}
+                onClick={handleClose}
+                >
+                <CloseIcon />
+                </IconButton>
+            </React.Fragment>
+            }
+        />
     </div>
 }

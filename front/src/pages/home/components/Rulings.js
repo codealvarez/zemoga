@@ -12,6 +12,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import {
+    SuspenseWithPerf,
     FirebaseAppProvider,
     useFirestoreCollectionData,
     useFirestore,
@@ -116,12 +117,10 @@ export default function Rullings(){
     const peopleCollection = useFirestore().collection('people');
     const people = useFirestoreCollectionData(peopleCollection, { idField: "id" });
     console.log(people);
-    
-    
-
     return <div id="rullings">
         <Container maxWidth="md">
             <h3>Previous rulings</h3>
+            {(people.status == "success") ? 
             <GridList spacing={30} cellHeight={550} className={classes.gridList}>
                 {people.data.map((person) => (
                     <div className="personCont" key={person.id}>
@@ -166,6 +165,9 @@ export default function Rullings(){
                     </div>
                 ))}
             </GridList>
+            :
+                <p>Loading people</p>
+            }
         </Container>
         <Snackbar
             key={messageInfo ? messageInfo.key : undefined}

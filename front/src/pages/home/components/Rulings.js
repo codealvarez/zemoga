@@ -11,6 +11,12 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import {
+    FirebaseAppProvider,
+    useFirestoreDocData,
+    useFirestore,
+    AuthCheck,
+  } from "reactfire";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -119,23 +125,26 @@ export default function Rullings(){
                                     <ValidateVotes up={person.up} down={person.down}></ValidateVotes>
                                     {person.name}</h4>
                                 <p>{person.description}</p>
+                                <AuthCheck fallback={<Button className="btnNoUser">Please log in to vote</Button>}>
                                 <div className="votePerson">
-                                    <Button id={'vote-'+person.id+'-'+1} className="voteUp" onClick={(e)=>{
-                                        setVoteOption([person.id, 1]);
-                                        changeStyle('vote-'+person.id+'-'+1);
-                                    }}>
-                                        <ThumbUpAltIcon style={{ color: common.white, fontSize:20 }}></ThumbUpAltIcon>  
-                                    </Button >
-                                    <Button id={'vote-'+person.id+'-'+2} className="voteDown" onClick={()=>{
-                                        setVoteOption([person.id, 2]);
-                                        changeStyle('vote-'+person.id+'-'+2);
-                                    }}>
-                                        <ThumbDownIcon style={{ color: common.white,  fontSize:20 }}></ThumbDownIcon>
-                                    </Button>
-                                    <Button className="vote" onClick={vote('Please select an option', person.id)}>
-                                        Vote now
-                                    </Button>
-                                </div>
+                                        <Button id={'vote-'+person.id+'-'+1} className="voteUp" onClick={(e)=>{
+                                            setVoteOption([person.id, 1]);
+                                            changeStyle('vote-'+person.id+'-'+1);
+                                        }}>
+                                            <ThumbUpAltIcon style={{ color: common.white, fontSize:20 }}></ThumbUpAltIcon>  
+                                        </Button >
+                                        <Button id={'vote-'+person.id+'-'+2} className="voteDown" onClick={()=>{
+                                            setVoteOption([person.id, 2]);
+                                            changeStyle('vote-'+person.id+'-'+2);
+                                        }}>
+                                            <ThumbDownIcon style={{ color: common.white,  fontSize:20 }}></ThumbDownIcon>
+                                        </Button>
+                                        <Button className="vote" onClick={vote('Please select an option', person.id)}>
+                                            Vote now
+                                        </Button>
+                                    </div>
+                                </AuthCheck>
+                                
                             </div>
                             <div className="voteResults">
                                 <div className="up" style={{width: (person.up + '%') }}>

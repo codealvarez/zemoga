@@ -76,7 +76,25 @@ export default function Rullings(){
                         user: user.uid,
                         option: voteOption[1]
                     }).then((res) => {
-                        setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }]);
+                        const currentPerson = app.firestore().doc('people/'+id).get().then((resPerson) => {
+                            let votesUpTemp = resPerson.data().up;
+                            let votesDownTemp = resPerson.data().down;
+                            if(voteOption[1] == 1){
+                                votesUpTemp++;
+                                app.firestore().doc('people/'+id).update({
+                                    up: votesUpTemp
+                                });
+                            }
+
+                            if(voteOption[1] == 2){
+                                votesDownTemp++;
+                                app.firestore().doc('people/'+id).update({
+                                    down: votesDownTemp
+                                });
+                            }
+                            setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }]);
+                        });
+                        
                     });
                 } else {
                     message = "Votes per box exceded";
@@ -113,6 +131,27 @@ export default function Rullings(){
         }
     }
 
+    function CalcPercentages(props) {
+        console.log(props);
+        
+        let total = props.up + props.down;
+        let upPercent = Math.round( ((props.up * 100) / total) * 10) / 10;
+        let downPercent = Math.round( ((props.down * 100) / total) * 10) / 10;
+        
+        return (
+        <>
+            <div className="up" style={{width: (upPercent + '%') }}>
+                <ThumbUpAltIcon style={{ color: common.white, fontSize:30 }}></ThumbUpAltIcon>  
+                <span>{upPercent}%</span>
+                </div>
+            <div className="down" style={{width: (downPercent + '%') }}>
+                <span>{downPercent}%</span>
+                <ThumbDownIcon style={{ color: common.white,  fontSize:30 }}></ThumbDownIcon>
+            </div>
+        </>
+        );
+    }
+
     const changeStyle = (id) => {
         console.log(id);
         // Clean borders for others vote boxes
@@ -143,6 +182,8 @@ export default function Rullings(){
     const peopleCollection = useFirestore().collection('people');
     const people = useFirestoreCollectionData(peopleCollection, { idField: "id" });
     console.log(people);
+
+
     return <div id="rullings">
         <Container maxWidth="md">
             <h3>Previous rulings</h3>
@@ -178,14 +219,8 @@ export default function Rullings(){
                                 
                             </div>
                             <div className="voteResults">
-                                <div className="up" style={{width: (person.up + '%') }}>
-                                    <ThumbUpAltIcon style={{ color: common.white, fontSize:30 }}></ThumbUpAltIcon>  
-                                    <span>{person.up}%</span>
-                                </div>
-                                <div className="down" style={{width: (person.down + '%') }}>
-                                    <span>{person.down}%</span>
-                                    <ThumbDownIcon style={{ color: common.white,  fontSize:30 }}></ThumbDownIcon>
-                                </div>
+                                <CalcPercentages up={person.up} down={person.down}></CalcPercentages>
+                                
                             </div>
                         </div>
                     </div>

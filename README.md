@@ -23,6 +23,8 @@ With this service I made my files deploid of the build React.js result.
 
 # Results
 
+[Web app link](https://zemoga-codealvarez.web.app/)
+
 I've created descripttion for each requirement result:
 
 ## Layout HTML-CSS
@@ -31,10 +33,19 @@ I've created descripttion for each requirement result:
     - I used the Material-UI system to build and set the comp of the elements when user resize the browser.
 
 - [x] Non safe web font used: Lato
-    - Font user for each element as Photoshop document indicates. I import the font in my [SASS style file](front/src/styles/_custom.scss), like this:
+    - Font user for each element as Photoshop document indicates. I import the font in my styles file, like this:
     `@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');`
 
+- [x] Use media queries to adapt the layout in small screens. (comp not provided, so use your creativity).
+    - I used the Material-UI system to build and set the comp of the elements when user resize the browser.
 
+- [x] You can rely on preprocessors / transpilers such as LESS/SASS or any sort of CSS framework if you want. (Pure CSS is also an option but you must argue the benefits)
+    - You can check my [SASS style file](front/src/styles/custom.scss)
+
+- [x] Clicking on one of the links of the main menu redirects the user to the other pages (we only provide a comp for the main page so just use white pages with the title section on them).
+    - You can click in each sections of my web app, like [Web app link](https://zemoga-codealvarez.web.app/how-it-works). Additional, I've a 404 page to handle the not-found content [Web app link](https://zemoga-codealvarez.web.app/anypage)
+
+    
 
 
 

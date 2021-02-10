@@ -27,12 +27,14 @@ I've created descripttion for each requirement result:
 
 ## Layout HTML-CSS
 
-1 [x] Use media queries to adapt the layout in small screens. (comp not provided, so use your creativity).
+- [x] Use media queries to adapt the layout in small screens. (comp not provided, so use your creativity).
     - I used the Material-UI system to build and set the comp of the elements when user resize the browser.
 
-2 [x] Non safe web font used: Lato
-    - Font user for each element as Photoshop document indicates. I import the font in my [SASS style file](frontsrc/styles/_custom.scss_), like this:
+- [x] Non safe web font used: Lato
+    - Font user for each element as Photoshop document indicates. I import the font in my [SASS style file](front/src/styles/_custom.scss), like this:
     `@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');`
+
+
 
 
 

@@ -11,12 +11,14 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import { app } from "../../../config/firebaseConfig";
 import {
     SuspenseWithPerf,
     FirebaseAppProvider,
     useFirestoreCollectionData,
     useFirestore,
     AuthCheck,
+    useUser
   } from "reactfire";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,6 +44,7 @@ export default function Rullings(){
     const [snackPack, setSnackPack] = React.useState([]);
     const [open, setOpen] = React.useState(false);
     const [messageInfo, setMessageInfo] = React.useState(undefined);
+    const { data: user } = useUser();
 
     React.useEffect(() => {
         if (snackPack.length && !messageInfo) {
@@ -60,6 +63,15 @@ export default function Rullings(){
         console.log(voteOption);
         if(voteOption[0] == id){
             console.log("OK");
+            message = "Thanks for votting";
+            const votesCollection = app.firestore().collection('people/'+id+'/votes');
+
+            votesCollection.add({
+                user: user.uid,
+                option: voteOption[1]
+            }).then((res) => {
+                setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }]);
+            });
         }else{
             console.log("No");
             setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }]);
@@ -90,7 +102,7 @@ export default function Rullings(){
     const changeStyle = (id) => {
         console.log(id);
         // Clean borders for others vote boxes
-        peopleData.forEach(element => {
+        people.data.forEach(element => {
             let elementT = document.getElementById("vote-"+element.id+"-1");
             ReactDOM.findDOMNode(elementT).style.border = "none";
 
